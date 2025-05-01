@@ -1,8 +1,24 @@
+/* Improved React Blog CSS */
+
+/* Custom Properties */
 :root {
   --bg: #282c34;
   --header: #fff;
   --link: #61dafb;
   --text: hsla(0, 0%, 100%, 0.88);
+  --text-secondary: hsla(0, 0%, 100%, 0.6);
+  --card-bg: #323742;
+  --hover-bg: #3a3f4b;
+  --divider: hsla(0, 0%, 100%, 0.1);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --transition: all 0.3s ease;
+}
+
+/* Reset and Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -10,50 +26,210 @@ body {
   font-family: "Merriweather", "Georgia", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--bg);
-  color: var(--text);
+  background: #4f4f4f;
+  color: #000;
+  line-height: 1.7;
+  padding: 0;
 }
 
-h1,
-h3 {
-  font-size: 2em;
+/* Typography */
+h1, h3 {
   font-family: Montserrat, sans-serif;
   font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
 }
 
+h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 1.75em;
+  color: var(--link);
+  margin-bottom: 0.25rem;
+  transition: var(--transition);
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+small {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+/* Layout Containers */
 .App {
   margin-left: auto;
   margin-right: auto;
-  padding: 2.5rem 1rem;
+  padding: 3rem 1.5rem;
   max-width: 700px;
+  min-height: 100vh;
+}
+
+/* Header Styling */
+header {
+  margin-bottom: 2.5rem;
+  position: relative;
 }
 
 header h1 {
-  font-size: 3em;
+  background: linear-gradient(90deg, var(--header), var(--link));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+  transition: var(--transition);
+  cursor: pointer;
 }
 
+header h1:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* About Section */
 aside {
   display: flex;
-  margin-bottom: 3rem;
+  align-items: center;
+  margin-bottom: 3.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--divider);
 }
 
 aside img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   background-color: black;
+  object-fit: cover;
+  border: 2px solid var(--link);
+  transition: var(--transition);
+  box-shadow: var(--shadow);
 }
 
+aside img:hover {
+  transform: scale(1.05);
+  border-color: var(--header);
+}
+
+aside p {
+  margin-bottom: 0;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* Article Styling */
 article {
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--divider);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+article:hover {
+  transform: translateX(5px);
+}
+
+article:last-child {
+  border-bottom: none;
 }
 
 article p {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
+  line-height: 1.8;
 }
 
-article h3 {
-  color: var(--link);
-  margin-bottom: 0rem;
+article h3:hover {
+  color: var(--header);
+}
+
+/* Reading Time Indicator */
+.reading-time {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0 1rem;
+}
+
+.reading-time small {
+  display: flex;
+  align-items: center;
+}
+
+.reading-time small span {
+  letter-spacing: 0.05em;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .App {
+    padding: 2rem 1rem;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+  }
+  
+  h3 {
+    font-size: 1.5em;
+  }
+  
+  aside {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  aside img {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (min-width: 769px) {
+  article:hover {
+    padding-left: 1rem;
+  }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.App {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Accessibility improvements */
+a:focus, button:focus {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
+/* Optional: Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--link);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--header);
 }
